@@ -1,0 +1,15 @@
+{
+  "name": "nike-website-clone",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm --prefix client run dev\" \"npm --prefix server run dev\"",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server run start",
+    "format": "npm --prefix client run format && npm --prefix server run format",
+    "lint": "npm --prefix client run lint && npm --prefix server run lint"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
