@@ -1,20 +1,18 @@
 import { Trash2 } from 'lucide-react';
 import { useCartStore } from '../../store/useCartStore';
-
 export function CartItem({ item }) {
   const { removeItem, updateQuantity } = useCartStore();
-
   return (
     <div className="flex gap-6 py-6 border-b">
       <img
         src={item.product.image}
-        alt={item.product.name}
+        alt={item.product.title}
         className="w-24 h-24 object-cover rounded-lg"
       />
       <div className="flex-1">
         <div className="flex justify-between">
           <div>
-            <h3 className="font-medium">{item.product.name}</h3>
+            <h3 className="font-medium">{item.product.title}</h3>
             <p className="text-gray-600 text-sm">
               Size: {item.size} | Color: {item.color}
             </p>

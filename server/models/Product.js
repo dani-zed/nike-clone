@@ -1,5 +1,4 @@
-import mongoose from 'mongoose';
-
+import mongoose from "mongoose";
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -14,6 +13,9 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  discountPrice: {
+    type: Number
+  },
   image: {
     type: String,
     required: true
@@ -26,14 +28,49 @@ const productSchema = new mongoose.Schema({
     type: String
   }],
   colors: [{
-    type: String
+    name: {
+      type: String,
+      required: true
+    },
+    class: {
+      type: String,
+      required: true
+    },
+    selectedClass: {
+      type: String,
+      required: true
+    },
+    id: {
+      type: String,
+      required: true
+    }
   }],
   inStock: {
     type: Boolean,
     default: true
-  }
+  },
+  stock: {
+    type: Number,
+    required: true
+  },
+  rating: {
+    type: Number,
+    default: 0
+  },
+  origin: {
+    type: String
+  },
+  declaration: {
+    type: String
+  },
+  marketedBy: {
+    type: String
+  },
+  highlights: [{
+    type: String
+  }],
 }, {
   timestamps: true
 });
 
-export default mongoose.model('Product', productSchema);
+export default mongoose.model('Product',productSchema);

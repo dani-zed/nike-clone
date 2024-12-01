@@ -291,7 +291,8 @@ const Navbar = () => {
           </div>
 
           {/* Cart Button */}
-          <Button variant="outline" size="icon" aria-label="View Cart">
+          <Button variant="outline" size="icon" aria-label="View Cart"
+ mb-20          onClick={()=>navigate("/cart")}>
             <ShoppingBag className="w-5 h-5" />
           </Button>
 

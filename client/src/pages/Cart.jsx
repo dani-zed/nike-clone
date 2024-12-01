@@ -2,8 +2,10 @@ import { ShoppingBag, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useCartStore } from '../store/useCartStore';
-import { CartItem } from '../components/cart/CartItem';
+import {CartItem} from '../components/cart/CartItem';
 import { CartSummary } from '../components/cart/CartSummary';
+
+
 
 export function Cart() {
   const { items } = useCartStore();
@@ -32,6 +34,6 @@ export function Cart() {
         </div>
         <CartSummary items={items} />
       </div>
-    </div>
-  );
+    </div>
+  );
 }

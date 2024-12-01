@@ -5,7 +5,7 @@ import  Footer  from './components/layout/Footer';
 import { Home } from './pages/Home';
 import { Products } from './pages/Products';
 import { ProductDetail } from './pages/ProductDetail';
-import { Cart } from './pages/Cart';
+import{Cart} from './pages/Cart';
 import { Checkout } from './pages/Checkout';
 import { OrderSuccess } from './pages/OrderSuccess';
 import { Orders } from './pages/Orders';
@@ -34,6 +34,7 @@ function App() {
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/order-success" element={<OrderSuccess />} />
               <Route path="/orders" element={<Orders />} />
+              {/* <Route path="/profile" element={<Profile />} /> */}
             </Route>
           </Routes>
         </main>
@@ -43,4 +44,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;

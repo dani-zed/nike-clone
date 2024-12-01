@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useCartStore } from '../store/useCartStore';
-import { CartSummary } from '../components/cart/CartSummary';
+
 import { PaymentForm } from '../components/checkout/PaymentForm';
 
 export function Checkout() {
@@ -21,9 +21,11 @@ export function Checkout() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    
+<div className='flex justify-center'>
+    <div className="max-w-7xl mx-auto px-4 py-8 ">
       <h1 className="text-3xl font-bold mb-8">Checkout</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols- gap-8">
         <div>
           <h2 className="text-2xl font-bold mb-6">Shipping Address</h2>
           <form className="space-y-4">
@@ -104,10 +106,9 @@ export function Checkout() {
           </form>
           <PaymentForm shippingAddress={shippingAddress} />
         </div>
-        <div>
-          <CartSummary items={items} />
-        </div>
+        
       </div>
     </div>
-  );
+    </div>
+  );
 }
