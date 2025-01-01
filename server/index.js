@@ -19,10 +19,10 @@ app.use(express.json());
 // Routes
 app.use('/api/products', productRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/orders', orderRoutes);
+app.use('/orders', orderRoutes);
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/nike-clone')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/nikeCloneApplication')
   .then(() => console.log('Connected to MongoDB'))
   .catch((error) => console.error('MongoDB connection error:', error));
 

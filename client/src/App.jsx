@@ -14,6 +14,8 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { PrivateRoute } from './components/auth/PrivateRoute';
 import Navbar from './components/ui/Navbar';
+import ProductCategory from './pages/ProductCategory';
+// import ProductList from './components/products/ProductList'; 
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path='men' element={<ProductCategory/>}/>
+            {/* <Route path='men' element={<ProductList/>}/> */}
             <Route path="/products" element={<Products />} />
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />

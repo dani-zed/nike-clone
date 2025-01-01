@@ -4,7 +4,7 @@ import { useCartStore } from '../store/useCartStore';
 import { PaymentForm } from '../components/checkout/PaymentForm';
 
 export function Checkout() {
-  const { items } = useCartStore();
+  const { items } = useCartStore(); 
   const [shippingAddress, setShippingAddress] = useState({
     street: '',
     city: '',

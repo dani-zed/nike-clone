@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCartStore } from '../../store/useCartStore';
 import { createOrder, verifyPayment } from '../../lib/api';
 import { Button } from '../ui/Button';
 
 export function PaymentForm({ shippingAddress }) {
   const { items, clearCart } = useCartStore();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const totalAmount = items.reduce(
     (total, item) => total + item.product.price * item.quantity,
@@ -12,6 +23,14 @@ export function PaymentForm({ shippingAddress }) {
   );
 
   const handlePayment = async () => {
+    if (!items.length) {
+      return alert('Your cart is empty.');
+    }
+    if (!shippingAddress) {
+      return alert('Please provide a valid shipping address.');
+    }
+
+    setLoading(true);
     try {
       const orderData = {
         items: items.map(item => ({
@@ -22,9 +41,8 @@ export function PaymentForm({ shippingAddress }) {
           price: item.product.price
         })),
         shippingAddress,
-        totalAmount
-      };
-
+        totalAmount,
+      }
       const { data } = await createOrder(orderData);
 
       const options = {
@@ -39,9 +57,9 @@ export function PaymentForm({ shippingAddress }) {
             await verifyPayment({
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature
+              razorpay_signature: response.razorpay_signature,
             });
-            
+
             await clearCart();
             window.location.href = '/order-success';
           } catch (error) {
@@ -51,18 +69,24 @@ export function PaymentForm({ shippingAddress }) {
         },
         prefill: {
           name: 'Customer Name',
-          email: 'customer@example.com'
+          email: 'customer@example.com',
         },
         theme: {
-          color: '#000000'
-        }
+          color: '#000000',
+        },
       };
 
       const razorpay = new window.Razorpay(options);
+      razorpay.on('payment.failed', (response) => {
+        console.error('Payment failed:', response.error);
+        alert('Payment was not successful. Please try again.');
+      });
       razorpay.open();
     } catch (error) {
       console.error('Payment initialization failed:', error);
       alert('Could not initialize payment. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -90,9 +114,10 @@ export function PaymentForm({ shippingAddress }) {
         onClick={handlePayment}
         className="w-full"
         size="lg"
+        disabled={loading}
       >
-        Pay Now
+        {loading ? 'Processing...' : 'Pay Now'}
       </Button>
-    </div>
-  );
+    </div>
+  );
 }

@@ -3,16 +3,23 @@ import Razorpay from 'razorpay';
 import crypto from 'crypto';
 import { auth } from '../middleware/auth.js';
 import Order from '../models/Order.js';
+import 'dotenv/config'; 
 
 const router = express.Router();
-// const Razorpay = require('razorpay')
+// const razorpay = new Razorpay({
+//   key_id: process.env.RAZORPAY_KEY_ID,
+//   key_secret: process.env.RAZORPAY_KEY_SECRET
+// });
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
 // Create a new order and get Razorpay order ID
 router.post('/create', auth, async (req, res) => {
+  console.log('Key ID:', process.env.RAZORPAY_KEY_ID);
+console.log('Key Secret:', process.env.RAZORPAY_KEY_SECRET);
+
   try {
     const { items, shippingAddress, totalAmount } = req.body;
 

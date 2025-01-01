@@ -1,12 +1,6 @@
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  image: string;
-}
+import React from 'react';
 
-const products: Product[] = [
+const products = [
   {
     id: 1,
     name: "Nike Air Max 270",
@@ -30,7 +24,7 @@ const products: Product[] = [
   },
 ];
 
-export function FeaturedProducts() {
+function FeaturedProducts() {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4">
@@ -38,13 +32,15 @@ export function FeaturedProducts() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {products.map((product) => (
             <div key={product.id} className="group cursor-pointer">
-              <div className="relative overflow-hidden rounded-lg mb-4">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-80 object-cover transform transition-transform group-hover:scale-105"
-                />
-              </div>
+              <a href='/products' className="block">
+                <div className="relative overflow-hidden rounded-lg mb-4">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-80 object-cover transform transition-transform group-hover:scale-105"
+                  />
+                </div>
+              </a>
               <h3 className="text-lg font-semibold mb-1">{product.name}</h3>
               <p className="text-gray-600 mb-2">{product.category}</p>
               <p className="font-medium">${product.price}</p>
@@ -55,3 +51,5 @@ export function FeaturedProducts() {
     </section>
   );
 }
+
+export default FeaturedProducts;
